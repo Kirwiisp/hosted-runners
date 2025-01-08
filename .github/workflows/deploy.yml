@@ -11,7 +11,7 @@ jobs:
   # Build job 
   build:
     # Specify runner +  build & upload the static files as an artifact
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Get index.html
         uses: actions/checkout@v4
@@ -21,8 +21,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
         with:
           path: site/
-
-jobs:
   deploy:
     # Add a dependency to the build job
     needs: build
@@ -37,7 +35,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     # Specify runner + deployment step
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
